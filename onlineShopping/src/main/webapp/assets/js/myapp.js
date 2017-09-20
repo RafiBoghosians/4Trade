@@ -8,9 +8,14 @@ $(function() {
 	case 'Contact Us':
 		$('#contact').addClass('active');
 		breake;
-	default:
-		$('#home').addClass('active');
+	case 'All Products':
+		$('#listProducts').addClass('active');
 		breake;
+	default:
+		$('#listProducts').addClass('active');
+		$('#a_' + menu).addClass('active');
+		break;
+		 
 	
 	}
 });

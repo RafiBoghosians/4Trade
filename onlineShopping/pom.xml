@@ -14,8 +14,13 @@
 	</properties>
 	
 	<dependencies>
-	
-	
+		<!-- Link back-end project -->
+		<dependency>
+			<groupId>am.fourTrade</groupId>
+			<artifactId>shoppingBackend</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		
 		<!-- Java EE API -->
 		<dependency>
 			<groupId>javax</groupId>
