@@ -1,71 +1,85 @@
 package am.fourTrade.shoppingBackend.daoimpl;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import am.fourTrade.shoppingBackend.dao.CategoryDAO;
 import am.fourTrade.shoppingBackend.dto.Category;
 
-
-@Repository("categoryDAO") //which will be the same name as object name that is given in the PageController
+//which will be the same name as object name that is given in the PageController
+@Repository("categoryDAO") 
+@Transactional
 public class CategoryDAOImpl implements CategoryDAO {
 
-	// static list of categories for testing purpose
-	private static List<Category> categories = new ArrayList<>();
-
-	// Add some dummy data to a static list for testing purpose which
-	// would be replaced later by access to record in database tables
-	static {
-		Category category = new Category();
-
-		// adding first category
-		category.setId(1);
-		category.setName("Television");
-		category.setDescription("This is some description for Television");
-		category.setImageURL("CAT_1.png");
-
-		categories.add(category);
-
-		
-		category = new Category();
-
-		// adding second category
-		category.setId(2);
-		category.setName("Mobile");
-		category.setDescription("This is some description for Mobile");
-		category.setImageURL("CAT_2.png");
-
-		categories.add(category);
-		
-		
-		category = new Category();
-
-		// adding third category
-		category.setId(3);
-		category.setName("Laptop");
-		category.setDescription("This is some description for Laptop");
-		category.setImageURL("CAT_3.png");
-
-		categories.add(category);
-	}
+	@Autowired
+	private SessionFactory sessionFactory;
 
 	@Override
 	public List<Category> list() {
-		 
-		return categories;
+									//hibernate query language(HQL)
+									// Category is the entity(Class(Category.java)) name
+									// not the table name inside database
+		String selectActiveCategory = "FROM Category WHERE active = :active";
+	
+		// Query is from hibernate query interface
+		Query query = sessionFactory.getCurrentSession().createQuery(selectActiveCategory);
+		
+		query.setParameter("active", true);
+				//returning list of categories which are active
+		return query.getResultList();
+	}
+
+	// Get a single category based on id
+	@Override
+	public Category get(int id) {
+		// the second argument requires a reference type, so we get get(int id) and
+		// wrape with Integer class
+		return sessionFactory.getCurrentSession().get(Category.class, Integer.valueOf(id));
+	}
+
+	// add a single category
+	@Override
+	public boolean add(Category category) {
+		try {
+			// add category to the database table
+			sessionFactory.getCurrentSession().persist(category);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	// update a single category
+	@Override
+	public boolean update(Category category) {
+		try {
+			// update category to the database table
+			sessionFactory.getCurrentSession().update(category);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 	@Override
-	public Category get(int id) {
-		// enhanced for loop
-		for(Category category : categories) {
-			if(category.getId() == id)
-				return category;
+	public boolean delete(Category category) {
+		// just deactivate the category and then update its condition 
+		category.setActive(false);
+		try {
+			// update category to the database table
+			sessionFactory.getCurrentSession().update(category);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
 		}
-		return null;
-		 
 	}
 
 }

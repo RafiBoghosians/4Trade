@@ -15,6 +15,7 @@ public class PageController {
 	 access to categoryDAO
 	 we are not using any "new" keyword to instantiate, this will be done by
 	 Spring Framework(Dependency Injection)*/
+
 	@Autowired
 	private CategoryDAO categoryDAO;
 
