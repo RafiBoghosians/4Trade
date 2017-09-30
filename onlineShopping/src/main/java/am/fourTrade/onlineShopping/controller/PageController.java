@@ -7,17 +7,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import am.fourTrade.shoppingBackend.dao.CategoryDAO;
+import am.fourTrade.shoppingBackend.dao.ProductDAO;
 import am.fourTrade.shoppingBackend.dto.Category;
+import am.fourTrade.shoppingBackend.dto.Product;
 
 @Controller
 public class PageController {
-/*	 @Repository("categoryDAO") is Autowired in PageController where we request
-	 access to categoryDAO
-	 we are not using any "new" keyword to instantiate, this will be done by
-	 Spring Framework(Dependency Injection)*/
+	/*
+	 * @Repository("categoryDAO") is Autowired in PageController where we request
+	 * access to categoryDAO we are not using any "new" keyword to instantiate, this
+	 * will be done by Spring Framework(Dependency Injection)
+	 */
 
 	@Autowired
 	private CategoryDAO categoryDAO;
+	
+	@Autowired
+	private ProductDAO productDAO;
 
 	@RequestMapping(value = { "/", "/home", "/index" })
 	public ModelAndView index() {
@@ -82,6 +88,28 @@ public class PageController {
 		mv.addObject("category", category);
 
 		mv.addObject("userClickCategoryProducts", true);
+		return mv;
+	}
+
+	// View a single product
+	@RequestMapping(value = "/show/{id}/product")
+	public ModelAndView showSingleProduct(@PathVariable("id") int id) {
+		ModelAndView mv = new ModelAndView("page");
+			
+			Product product = productDAO.get(id);
+			
+			// In order to increment the number of customer views
+			product.setViews(product.getViews() + 1);
+			
+			//update the counter(count) of view as soon as someone goes to that particular product
+			productDAO.update(product);
+			
+			mv.addObject("title", product.getName());
+			mv.addObject("product", product);
+			mv.addObject("userClickShowProduct", true);
+			
+			
+			
 		return mv;
 	}
 

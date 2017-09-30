@@ -26,8 +26,6 @@ public class Category {
 	@Column(name="image_url")
 	private String imageURL;
 	
-/*	@Column(name="is_active")
-	private boolean active = true;*/
 	
 	@Column(name="is_active", nullable = false)
 	@Type(type = "org.hibernate.type.NumericBooleanType")

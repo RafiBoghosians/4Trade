@@ -14,6 +14,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring.version>4.3.11.RELEASE</spring.version>
 		<hibernate.version>5.2.10.Final</hibernate.version>
+		<jackson.version>2.8.7</jackson.version>
 	</properties>
 
 	<dependencies>
@@ -73,7 +74,30 @@
 			<version>2.1.1</version>
 		</dependency>
 
+		<!-- To get a product in JSON format -->
+		<!--Jackson Databind 2.8.7(databind/annotations/core) -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+
+		<!-- Jackson Annotations 2.8.7(jackson-annotations in the above dependency 
+			is 2.8.0 we change it) -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+
+
+
+
 	</dependencies>
+
+
+
+
 
 	<build>
 		<plugins>
