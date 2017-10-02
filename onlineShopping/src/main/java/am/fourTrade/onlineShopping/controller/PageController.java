@@ -1,11 +1,14 @@
 package am.fourTrade.onlineShopping.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import am.fourTrade.onlineShopping.exception.ProductNotFoundException;
 import am.fourTrade.shoppingBackend.dao.CategoryDAO;
 import am.fourTrade.shoppingBackend.dao.ProductDAO;
 import am.fourTrade.shoppingBackend.dto.Category;
@@ -18,7 +21,9 @@ public class PageController {
 	 * access to categoryDAO we are not using any "new" keyword to instantiate, this
 	 * will be done by Spring Framework(Dependency Injection)
 	 */
-
+	
+	private static final Logger logger = LoggerFactory.getLogger(PageController.class);
+	
 	@Autowired
 	private CategoryDAO categoryDAO;
 	
@@ -30,6 +35,9 @@ public class PageController {
 
 		ModelAndView mv = new ModelAndView("page");
 		mv.addObject("title", "Home");
+		
+		logger.info("Inside the PageController index method - INFO");
+		logger.debug("Inside the PageController index method - DEBUG");
 
 		// passing the list of categories
 		mv.addObject("categories", categoryDAO.list());
@@ -93,10 +101,12 @@ public class PageController {
 
 	// View a single product
 	@RequestMapping(value = "/show/{id}/product")
-	public ModelAndView showSingleProduct(@PathVariable("id") int id) {
+	public ModelAndView showSingleProduct(@PathVariable("id") int id) throws ProductNotFoundException {
 		ModelAndView mv = new ModelAndView("page");
 			
 			Product product = productDAO.get(id);
+			
+			if(product == null) throw new ProductNotFoundException();
 			
 			// In order to increment the number of customer views
 			product.setViews(product.getViews() + 1);
@@ -108,9 +118,8 @@ public class PageController {
 			mv.addObject("product", product);
 			mv.addObject("userClickShowProduct", true);
 			
-			
-			
 		return mv;
 	}
+	
 
 }

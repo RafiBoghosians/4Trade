@@ -11,7 +11,7 @@
     http://www.springframework.org/schema/mvc/spring-mvc.xsd
     ">
    
-   <context:component-scan base-package="am.fourTrade.onlineShopping.controller"></context:component-scan>
+   <context:component-scan base-package="am.fourTrade.onlineShopping"></context:component-scan>
    <context:component-scan base-package="am.fourTrade.shoppingBackend"></context:component-scan>
 
    

@@ -67,11 +67,17 @@
 			<version>${hibernate.version}</version>
 		</dependency>
 
-		<!-- Enable connection pooling(commins-dbcp2/pool2/logging) -->
+		<!-- Enable connection pooling(excluded: commons-dbcp2/pool2/logging) -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-dbcp2</artifactId>
 			<version>2.1.1</version>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- To get a product in JSON format -->
@@ -90,8 +96,23 @@
 			<version>${jackson.version}</version>
 		</dependency>
 
+		<!-- Logback classic framework -->
+		<!-- Logging is a powerful aid for understanding and debugging program’s 
+			run-time behavior. Logs capture and persist the important data and make it 
+			available for analysis at any point in time. -->
+		<!-- Logback Classic Module 1.2.3(logback-classic/logback-core/slf4j-api1.7.25) -->
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.2.3</version>
+		</dependency>
 
-
+		<!-- JCL 1.2 Implemented Over SLF4J 1.7.25(jcl-over-slf4j-1.7.25) -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>1.7.25</version>
+		</dependency>
 
 	</dependencies>
 
