@@ -1,4 +1,4 @@
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="container">
 
 	<!-- For Designing we should use to functionality one for BreadCrumb the other for loading product detail-->
@@ -40,17 +40,57 @@
 		<hr />
 
 		<h4>
-			Price : <strong> ${product.unitPrice }  &#1423;</strong>
+			Price : <strong> ${product.unitPrice } &#1423;</strong>
 		</h4>
 
 
 		<h6>Available Quantity : ${product.quantity}</h6>
 
 		<!-- 2 buttons, one is for add to cart the other is for going back  -->
+		<!-- For Displaying The Message -->
+		<c:choose>
 
-		<a href="${contextRoot }/cart/add/${product.id}/product" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart</a>
-		
-		<a href="${contextRoot }/show/all/products" class="btn btn-primary"><span class="glyphicon glyphicon-circle-arrow-left"></span> Back</a>
+			<c:when test="${product.quantity < 1}">
+				<h6>
+
+					Available Quantity : <span style="color: red">Out of Stock!</span>
+
+				</h6>
+			</c:when>
+			<c:otherwise>
+
+				<h6>Available Quantity : ${product.quantity}</h6>
+
+			</c:otherwise>
+		</c:choose>
+		<!-- For Adding to Cart, if the quantity is less than 0, the add to cart button should be disabled -->
+		<c:choose>
+
+			<c:when test="${product.quantity < 1}">
+				<h6>
+
+					<a href="javascript:void(0)" class="btn btn-success disabled">
+					<del><span class="glyphicon glyphicon-shopping-cart"></span>
+					Add to Cart </del></a>
+							
+						
+
+				</h6>
+			</c:when>
+			<c:otherwise>
+
+				<a href="${contextRoot}/cart/add/${product.id}/product"
+					class="btn btn-success"> <span
+					class="glyphicon glyphicon-shopping-cart"></span> 
+				Add to Cart</a>
+
+			</c:otherwise>
+		</c:choose>
+
+
+		<a href="${contextRoot}/show/all/products" class="btn btn-primary">
+			<span class="glyphicon glyphicon-circle-arrow-left"></span> Back
+		</a>
 
 
 

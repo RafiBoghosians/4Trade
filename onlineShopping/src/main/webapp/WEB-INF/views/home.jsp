@@ -22,16 +22,21 @@
 						</ol>
 						<div class="carousel-inner">
 							<div class="item active">
-								<img class="slide-image" src="http://placehold.it/800x300"
-									alt="">
+								<!-- <img class="slide-image" src="http://placehold.it/800x300"alt=""> -->
+
+									<img class="slide-image" src="<c:url value="/resources/images/e1.jpg" />" alt="" />
 							</div>
 							<div class="item">
-								<img class="slide-image" src="http://placehold.it/800x300"
-									alt="">
+							
+								<!-- <img class="slide-image" src="http://placehold.it/800x300"alt=""> -->
+								<img class="slide-image" src="<c:url value="/resources/images/e2.jpg" />" alt="" />
+									
 							</div>
 							<div class="item">
-								<img class="slide-image" src="http://placehold.it/800x300"
-									alt="">
+							
+								<!-- <img class="slide-image" src="http://placehold.it/800x300"alt=""> -->
+								<img class="slide-image" src="<c:url value="/resources/images/e3.jpg" />" alt="" />
+									
 							</div>
 						</div>
 						<a class="left carousel-control" href="#carousel-example-generic"
@@ -171,7 +176,7 @@
 					</div>
 				</div>
 
-				<div class="col-sm-4 col-lg-4 col-md-4">
+				<!-- <div class="col-sm-4 col-lg-4 col-md-4">
 					<h4>
 						<a href="#">Like this template?</a>
 					</h4>
@@ -185,7 +190,7 @@
 						href="http://maxoffsky.com/code-blog/laravel-shop-tutorial-1-building-a-review-system/">View
 						Tutorial</a>
 				</div>
-
+ -->
 			</div>
 
 		</div>
