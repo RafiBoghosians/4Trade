@@ -44,8 +44,6 @@
 		</h4>
 
 
-		<h6>Available Quantity : ${product.quantity}</h6>
-
 		<!-- 2 buttons, one is for add to cart the other is for going back  -->
 		<!-- For Displaying The Message -->
 		<c:choose>

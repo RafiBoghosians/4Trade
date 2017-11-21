@@ -43,6 +43,14 @@
 			<artifactId>spring-context</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+		
+		<!-- spring-web(Itself) added during Multipart -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-web</artifactId>
+		    <version>${spring.version}</version>
+		</dependency>
+		
 
 		<!-- Spring Object/Relational Mapping(spring-orm/spring-jdbc/spring-tx) -->
 		<dependency>
@@ -113,6 +121,24 @@
 			<artifactId>jcl-over-slf4j</artifactId>
 			<version>1.7.25</version>
 		</dependency>
+		
+		<!-- Serverside Validation  -->
+		<!-- javax-validation-api(validation-api-1.1.0.Final) -->
+		<dependency>
+		    <groupId>javax.validation</groupId>
+		    <artifactId>validation-api</artifactId>
+		    <version>1.1.0.Final</version>
+		</dependency>
+		<!-- hibernate-validator-5.4.1.Final(The same libraries) -->
+		<dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-validator</artifactId>
+		    <version>5.4.1.Final</version>
+		</dependency>
+		
+		
+		
+		
 
 	</dependencies>
 
