@@ -40,7 +40,7 @@ public class ManagementController {
 	//This is only for our debugging purpose
 	private static final Logger logger = LoggerFactory.getLogger(ManagementController.class);
 
-	@RequestMapping(value = { "/products" }, method = RequestMethod.GET)
+	@RequestMapping(value = "/products", method = RequestMethod.GET)
 	public ModelAndView showManageProducts(@RequestParam(name = "operation", required = false) String operation) {
 
 		ModelAndView mv = new ModelAndView("page");
@@ -85,23 +85,24 @@ public class ManagementController {
 	//we are going to redirect it to another URL
 	@RequestMapping(value = { "/products"}, method = RequestMethod.POST)
 	//in our manageProducts.jsp, modelAttribute="product" so we put "product" in @ModelAttribute
-	public String handleProductSubmission(@Valid @ModelAttribute("product") Product modifiedProduct, BindingResult result, Model model, HttpServletRequest request) {
+	public String handleProductSubmission(@Valid @ModelAttribute("product") Product modifiedProduct, BindingResult results, Model model, HttpServletRequest request) {
 		
 		
 		//for validation of image
 		if(modifiedProduct.getId() == 0) {
 			//we are going to validate modifiedProduct and binding the result object
-			new ProductValidator().validate(modifiedProduct, result);
-		}else{
+			new ProductValidator().validate(modifiedProduct, results);
+		}
+		else{
 			//we need to ensure that original file name is not empty, it means there is some content in it we want to validate it
 			if(!modifiedProduct.getFile().getOriginalFilename().equals("")) {
-				new ProductValidator().validate(modifiedProduct, result);
+				new ProductValidator().validate(modifiedProduct, results);
 			}
 			
 		}
 		
 		// check if there are any errors
-		if(result.hasErrors()) {
+		if(results.hasErrors()) {
 			
 			model.addAttribute("userClickManageProducts", true);
 			model.addAttribute("title", "Manage Products");
@@ -115,7 +116,7 @@ public class ManagementController {
 		
 		// we check if id is 0(product is not available) then we add the product
 		//Otherwise if the id is not 0, so we have that product and we need only update it.
-		if(modifiedProduct.getId()==0) {
+		if(modifiedProduct.getId() == 0) {
 			//create a new product record if id is zero
 			productDAO.add(modifiedProduct);
 		}
@@ -127,7 +128,7 @@ public class ManagementController {
 		
 		// if it is not equal to empty string, it means there is a file which is available in the file element for upload
 		if(!modifiedProduct.getFile().getOriginalFilename().equals("")) {
-			FileUploadUtility.uploadFile(request, modifiedProduct.getFile(), modifiedProduct.getCode() );
+			FileUploadUtility.uploadFile(request, modifiedProduct.getFile(), modifiedProduct.getCode());
 		}
 		
 		
@@ -156,7 +157,7 @@ public class ManagementController {
 	}
 	
 	//To handle category submission
-	@RequestMapping(value ={"/category"}, method=RequestMethod.POST)
+	@RequestMapping(value = "/category", method=RequestMethod.POST)
 	public String handleCategorySubmission(@ModelAttribute Category category){
 		//add new category
 		categoryDAO.add(category);
