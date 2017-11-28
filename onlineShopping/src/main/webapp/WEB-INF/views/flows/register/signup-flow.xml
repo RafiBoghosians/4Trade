@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow
+                          http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+
+
+
+	<!-- First view state is the start state -->
+	<view-state id="personal" view="flows/register/signup-personal"></view-state>
+	
+	
+	<!-- end state -->
+	<end-state id="home" view="externalRedirect:contextRelative:/"/>
+	
+	
+	
+	<!-- Add a GLOBAL TRANSITION to move the home from any particular view and end the state -->
+	<global-transitions>
+		<!-- when the user click on that particular home it will go to another state whose id=home(end-state) -->
+		<transition on="home" to="home"/>
+	</global-transitions>
+	
+
+
+</flow>
