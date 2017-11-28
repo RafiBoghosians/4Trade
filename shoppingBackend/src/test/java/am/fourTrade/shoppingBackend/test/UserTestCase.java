@@ -29,7 +29,7 @@ public class UserTestCase {
 	}
 	
 	//testing all the add method that we have added
-	@Test
+/*	@Test
 	public void testAdd() {
 		//Setting values
 		user = new User();
@@ -89,9 +89,57 @@ public class UserTestCase {
 			
 			// Adjoin the shipping address
 			assertEquals("System failed to add a new shipping address",true, userDAO.addAddress(address));
-		
 		}
-						
+	}*/
+	
+	/*
+	//For 1 to 1 mapping
+	@Test
+	public void testAdd() {
+		//Setting values
+		user = new User();
+		user.setFirstName("James");
+		user.setLastName("Gosling");
+		user.setEmail("jamesgosling@gmail.com");
+		user.setContactNumber("19195562");
+		user.setRole("USER");
+		user.setPassword("123456");
+									
+		if(user.getRole().equals("USER")) {
+			// create a new cart for the USER
+			cart = new Cart();
+			
+			cart.setUser(user);
+			
+			// Attaching cart with the user
+			user.setCart(cart);
+		}
+		
+		// Adding the User
+		assertEquals("System failed to add a new user",true, userDAO.addUser(user));  
+	}*/
+	
+
+	//For updating cart
+	@Test
+	public void testUpdateCart() {
+		
+		//Fetching the user by the email
+		user = userDAO.getByEmail("jamesgosling@gmail.com");
+		
+		//Once the user is fetched we need to get the cart of the user
+		cart = user.getCart();
+		
+		cart.setGrandTotal(242424);
+		cart.setCartLines(2);
+		
+		assertEquals("System failed to update a cart", true, userDAO.updateCart(cart));
+		
+		
+		
+		
 	}
+	
+	
 
 }

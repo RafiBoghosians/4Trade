@@ -1,10 +1,12 @@
 package am.fourTrade.shoppingBackend.dto;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -35,6 +37,22 @@ public class User {
 	private String password;
 
 	private boolean enabled = true;
+	
+	/* ---------------- */
+	//"user" came from Cart.java in order to have parent(User) and child(Cart) relationship
+	//User class will take the ownership of the relation
+	// CascadeType.ALL -> any operation that we are going to perform with user it will affect also child tables
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+	private Cart cart;
+
+	public Cart getCart() {
+		return cart;
+	}
+
+	public void setCart(Cart cart) {
+		this.cart = cart;
+	}
+	/* ---------------- */
 
 	// User Class Setters and Getters
 	public int getId() {

@@ -40,14 +40,40 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public boolean addCart(Cart cart) {
+	public boolean updateCart(Cart cart) {
 		try {
-			sessionFactory.getCurrentSession().persist(cart);
+			sessionFactory.getCurrentSession().update(cart);
 			return true;
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			return false;
 		}
+	}
+	
+	//fetch the user based on email
+	@Override
+	public User getByEmail(String email) {
+		//where the email is equal to the parameter that we pass
+		String selectQuery = "FROM User WHERE email = :email";
+		
+		//using try catch block since
+		// we are going to fetch that particular user with email address which is unique
+		// and it is going to be used as username
+		try {
+			
+			return sessionFactory.getCurrentSession()
+					.createQuery(selectQuery, User.class) 	//based on our selectQuery on User.class
+					.setParameter("email", email)			//param name is "email", the param that we pass email
+					.getSingleResult();						//since we want to return a single user
+															//It will thorw an exception if there are multiple result or no result
+			
+			
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return null;
+		}
+		
 	}
 
 }

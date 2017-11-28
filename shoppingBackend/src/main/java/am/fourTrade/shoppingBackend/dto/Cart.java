@@ -21,6 +21,7 @@ public class Cart {
 	 */
 	
 	/**Hibernate OneToOne unidirectional mapping*/
+	//we should assign the same name "user" in User.java in order to have child and parent relationship
 	@OneToOne
 	private User user;
 	
