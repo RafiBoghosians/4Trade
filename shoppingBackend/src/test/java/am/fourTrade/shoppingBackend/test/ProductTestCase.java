@@ -50,25 +50,43 @@ public class ProductTestCase {
 	 * 
 	 * }
 	 */
-
+	
+	// If we look at the database we will see 8 active products
 	@Test
 	public void testListOfActiveProducts() {
-		assertEquals("Something went wrong while fetching the list of products!", 5,
+		assertEquals("Something went wrong while fetching the list of products!", 8,
 				productDAO.listActiveProducts().size());
 	}
-
+	
+	//Below Explanation is only for the first statment
+	/* Category id 3 is our Mobile Category
+	Check list of active products in mobile section
+	So we can see 5 products in mobile section, out of which 1 is deactive
+	thus we will have 4 active products */
 	@Test
 	public void testListOfActiveProductsByCategory() {
-		assertEquals("Something went wrong while fetching active records", 3,
+		assertEquals("Something went wrong while fetching active records", 4,
 				productDAO.listActiveProductsByCategory(3).size());
-		assertEquals("Something went wrong while fetching active records", 2,
+		assertEquals("Something went wrong while fetching active records", 4,
 				productDAO.listActiveProductsByCategory(1).size());
 	}
-
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*
 	@Test
 	public void testGetLatestActiveProducts() {
 		assertEquals("Something went wrong while fetching latest active records", 3,
 				productDAO.getLatestActiveProducts(3).size());
 	}
-
+*/
 }

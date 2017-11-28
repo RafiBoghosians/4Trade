@@ -152,8 +152,8 @@ public class ManagementController {
 		
 		
 		return (isActive)? 
-				"You have successfully activate the product with id " + product.getId() :
-				"You have successfully deactivate the product with id " + product.getId();
+				"You have successfully deactivate the product with id " + product.getId() :
+				"You have successfully activate the product with id " + product.getId();
 	}
 	
 	//To handle category submission

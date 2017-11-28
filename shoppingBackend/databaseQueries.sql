@@ -73,3 +73,29 @@ VALUES ('PRDMNO123PQRX', ' Macbook Pro', 'apple', 'This is one of the best lapto
 
 INSERT INTO product (code, name, brand, description, unit_price, quantity, is_active, category_id, supplier_id)
 VALUES ('PRDABCXYZDEFX', 'Dell XPS15', 'dell', 'This is one of the best laptop series from dell that can be used!', 1200000, 5, true, 1, 3 );
+
+
+
+CREATE TABLE address (
+	id INT NOT NULL AUTO_INCREMENT,
+	user_id INT,
+	address_line_one VARCHAR(100),
+	address_line_two VARCHAR(100),
+	city VARCHAR(45),
+	state VARCHAR(45),
+	country VARCHAR(45),
+	postal_code VARCHAR(45),
+	is_billing BOOLEAN,
+	is_shipping BOOLEAN,
+	CONSTRAINT fk_address_user_id FOREIGN KEY (user_id ) REFERENCES user_detail (id),
+	CONSTRAINT pk_address_id PRIMARY KEY (id)
+);
+
+CREATE TABLE cart (
+	id INT NOT NULL AUTO_INCREMENT,
+	user_id INT,
+	grand_total DECIMAL(10,2),
+	cart_lines int,
+	CONSTRAINT fk_cart_user_id FOREIGN KEY (user_id ) REFERENCES user_detail (id),
+	CONSTRAINT pk_cart_id PRIMARY KEY (id)
+);
