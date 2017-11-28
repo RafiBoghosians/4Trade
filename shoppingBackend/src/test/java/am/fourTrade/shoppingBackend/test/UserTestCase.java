@@ -119,7 +119,7 @@ public class UserTestCase {
 		assertEquals("System failed to add a new user",true, userDAO.addUser(user));  
 	}*/
 	
-
+/*
 	//For updating cart
 	@Test
 	public void testUpdateCart() {
@@ -135,11 +135,98 @@ public class UserTestCase {
 		
 		assertEquals("System failed to update a cart", true, userDAO.updateCart(cart));
 		
+	}
+/*	
+	//For adding address
+	@Test
+	public void testAddress() {
 		
+	//1.We need to add a new user
+		user = new User();
+		user.setFirstName("James");
+		user.setLastName("Gosling");
+		user.setEmail("jamesgosling@gmail.com");
+		user.setContactNumber("19195562");
+		user.setRole("USER");
+		user.setPassword("123456");		
+		//add user
+		assertEquals("System failed to add a new user",true, userDAO.addUser(user));  
+											
+
+	//2.We need to add a new address
 		
+		address = new Address();
+		address.setAddressLineOne("40 Marshal Baghramyan Ave.");
+		address.setAddressLineTwo("1000 Broadway, Suite 280, Oakland, CA 94607");
+		address.setCity("Yerevan");
+		address.setState("Yerevan");
+		address.setCountry("Armenia");
+		address.setPostalCode("0051");
+		address.setBilling(true);
+		
+		// attached the user to the address, since we are already using ManyToOne annotation and we are created that user filed
+		address.setUser(user);
+		assertEquals("System failed to add a new address",true, userDAO.addAddress(address));  
+		
+	//3.We need to add the shipping address
+		
+		address = new Address();
+		address.setAddressLineOne("Teryan Street 105");
+		address.setAddressLineTwo("2000 Broadway, Suite 380, Oakland, CA 94607");
+		address.setCity("Yerevan");
+		address.setState("Yerevan");
+		address.setCountry("Armenia");
+		address.setPostalCode("0020");
+		// set shipping to true
+		address.setShipping(true);
+		
+		//attached the user to the address
+		address.setUser(user);
+		
+		assertEquals("System failed to add a shipping address",true, userDAO.addAddress(address));  
 		
 	}
+/*
+	@Test
+	public void testAddress() {
+		
+		user = userDAO.getByEmail("jamesgosling@gmail.com");
+		
+		//we are going to add shipping address
+		address = new Address();
+		address.setAddressLineOne("Teryan Street 110");
+		address.setAddressLineTwo("2000 Broadway, Suite 380, Oakland, CA 94607");
+		address.setCity("Ashtarak");
+		address.setState("Gegharquniq");
+		address.setCountry("Armenia");
+		address.setPostalCode("0020");
+		// set shipping to true
+		address.setShipping(true);
+		
+		//attached the user to the address
+		address.setUser(user);
+		
+		assertEquals("System failed to add a shipping address",true, userDAO.addAddress(address));
+		
+	}
+*/		
+	
+	//for testing listShippingAddresses and getBillingAddress methods
+	@Test
+	public void testGetAddress() {
+	
+		user = userDAO.getByEmail("jamesgosling@gmail.com");
+		//we are checking the size of the shipping address for the user which we are fetched the above line
+		//At this moment we have 2 shipping address that is why size is 2
+		assertEquals("System failed to get the list of address and size doesn't match!",2 ,
+				userDAO.listShippingAddresses(user).size());
+				
+		
+		//Once we get the billing address of that particular user, we are going to get the city and
+		//check if it is match with Yerevan
+		assertEquals("System failed to get the billing address and size doesn't match!","Yerevan",
+				userDAO.getBillingAddress(user).getCity());
 	
 	
-
+	}
 }

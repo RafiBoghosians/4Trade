@@ -1,5 +1,7 @@
 package am.fourTrade.shoppingBackend.daoimpl;
 
+import java.util.List;
+
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -74,6 +76,45 @@ public class UserDAOImpl implements UserDAO {
 			return null;
 		}
 		
+	}
+
+	@Override
+	public Address getBillingAddress(User user) {
+		String selectQuery = "FROM Address WHERE user = :user AND billing = :billing";
+		//again we use try catch block if it is going to return more than one billing address it will give us null value
+		try {
+			
+			return sessionFactory.getCurrentSession()
+					.createQuery(selectQuery, Address.class)
+					.setParameter("user", user)
+					.setParameter("billing", true) //the value of billing would be true
+					.getSingleResult();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
+	
+	
+
+	@Override
+	public List<Address> listShippingAddresses(User user) {
+		String selectQuery = "FROM Address WHERE user = :user AND shipping = :shipping";
+		//again we use try catch block if it is going to return more than one billing address it will give us null value
+		try {
+			
+			return sessionFactory.getCurrentSession()
+					.createQuery(selectQuery, Address.class)
+					.setParameter("user", user)
+					.setParameter("shipping", true) //the value of billing would be true
+					.getResultList();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 }
