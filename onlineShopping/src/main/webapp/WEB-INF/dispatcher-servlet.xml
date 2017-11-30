@@ -60,9 +60,9 @@
 	<!-- DispatcherServelet knows how to dispatch requests by consulting with one or more
 	handler mappings. For web flows, FlowHandlerMapping helps DispatcherServlet know to send
 	flow requests to the FlowHandlerAdapter -->
+	<!-- This will give a priority to webflow in situations if we add controller with register mapping -->
 	<bean class="org.springframework.webflow.mvc.servlet.FlowHandlerMapping">
 		<property name="flowRegistry" ref="flowRegistry"></property>
-		<!-- This will give a priority to webflow in situations if we add controller with register mapping -->
 		<property name="order" value="-1"></property>
 	</bean>
    

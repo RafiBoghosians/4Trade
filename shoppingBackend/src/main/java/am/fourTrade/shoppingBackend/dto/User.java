@@ -1,5 +1,8 @@
 package am.fourTrade.shoppingBackend.dto;
 
+
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,10 +11,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "user_detail")
-public class User {
+public class User implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	// User Class Private Fields
 	@Id
@@ -36,6 +45,21 @@ public class User {
 	@Column(name = "password")
 	private String password;
 
+	
+	/*----------------------------*/
+	//By default all domain entity types will be persisted unless they are annotated with @Transient,
+	@Transient
+	private String confirmPassword;
+
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
+	}
+	/* --------------------------*/
+	
 	private boolean enabled = true;
 	
 	/* ---------------- */

@@ -1,6 +1,7 @@
 package am.fourTrade.shoppingBackend.dto;
 
 
+import java.io.Serializable;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -19,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class Product {
 	
+
 	//private fields
 	
 	

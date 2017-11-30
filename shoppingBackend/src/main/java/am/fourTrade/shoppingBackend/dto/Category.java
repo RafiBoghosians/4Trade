@@ -1,5 +1,7 @@
 package am.fourTrade.shoppingBackend.dto;
 
+
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +12,8 @@ import org.hibernate.annotations.Type;
 
 @Entity
 public class Category {
+
+
 
 	// Private fields
 	

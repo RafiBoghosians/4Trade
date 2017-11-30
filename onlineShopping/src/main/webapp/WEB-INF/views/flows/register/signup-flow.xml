@@ -4,15 +4,47 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/webflow
                           http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
+	
+	
+	<!-- In order to parse the information of fields-->
+	<!-- Creating instance of User by using var element-->
+	<var name="user" class="am.fourTrade.shoppingBackend.dto.User"></var>
+	<var name="billing" class="am.fourTrade.shoppingBackend.dto.Address"></var>
+	
+	
+	
+	
+	
 
-
-	<!-- First view state is the start state -->
-	<view-state id="personal" view="flows/register/signup-personal"></view-state>
+	<!-- View State to add the personal details about the person(Start State)-->
+	<!-- the user instance is going to store inside the flow scope so we need to parse the instance by adding model="user" -->
+	<view-state id="personal" view="flows/register/signup-personal" model="user">
+		<!-- when the user clicks on Submit Button(sign up-personal) -->
+		<transition on="billing" to="billing"></transition>
+	</view-state>
+	
+	<!-- View State that will have the address of particular user-->
+	<view-state id="billing" view="flows/register/signup-billing" model="billing">
+		<transition on="personal" to="personal"></transition>
+		<transition on="confirm" to="confirm"></transition>
+	</view-state>
+	
+	
+	
+	
+	<!-- View State that will show personal information and address in details and allow the user to update/edit information-->
+	<view-state id="confirm" view="flows/register/signup-confirm">
+		<transition on="personal" to="personal"></transition>
+		<transition on="billing" to="billing"></transition>
+		<transition on="success" to="success"></transition>
+	</view-state>
+	
 	
 	
 	<!-- end state -->
-	<end-state id="home" view="externalRedirect:contextRelative:/"/>
-	
+	<end-state id="home" view="externalRedirect:contextRelative:/"></end-state>
+	<!-- End State which will be displayed after successfully registered -->
+	<end-state id="success" view="flows/register/signup-success"></end-state>
 	
 	
 	<!-- Add a GLOBAL TRANSITION to move the home from any particular view and end the state -->
