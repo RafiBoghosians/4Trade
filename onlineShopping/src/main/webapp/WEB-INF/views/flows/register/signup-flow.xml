@@ -12,7 +12,11 @@
 	<var name="billing" class="am.fourTrade.shoppingBackend.dto.Address"></var>
 	
 	
-	
+	<!-- Return and add the registerModel instance  inside the flow -->
+	<!-- we call init() function of RegisterModel.java class and return and store the result inside of flowScope.registerModel -->
+	<on-start>
+		<evaluate expression="registerHandler.init()" result="flowScope.registerModel"></evaluate>
+	</on-start>
 	
 	
 
@@ -21,27 +25,41 @@
 	<view-state id="personal" view="flows/register/signup-personal" model="user">
 		<!-- when the user clicks on Submit Button(sign up-personal) -->
 		<transition on="billing" to="billing"></transition>
+			<on-exit>																<!-- model="user" -->
+				<evaluate expression="registerHandler.addUser(flowScope.registerModel,user)" />
+			</on-exit>
 	</view-state>
 	
 	<!-- View State that will have the address of particular user-->
 	<view-state id="billing" view="flows/register/signup-billing" model="billing">
 		<transition on="personal" to="personal"></transition>
 		<transition on="confirm" to="confirm"></transition>
+			<on-exit>																	<!-- model="billing" -->
+				<evaluate expression="registerHandler.addBilling(flowScope.registerModel,billing)" /> 
+			</on-exit>	
 	</view-state>
 	
 	
 	
 	
 	<!-- View State that will show personal information and address in details and allow the user to update/edit information-->
-	<view-state id="confirm" view="flows/register/signup-confirm">
+																<!-- we are parsing registerModel to our confirm page(signup-confirm.jsp) -->	
+	<view-state id="confirm" view="flows/register/signup-confirm" model="flowScope.registerModel">
 		<transition on="personal" to="personal"></transition>
 		<transition on="billing" to="billing"></transition>
-		<transition on="success" to="success"></transition>
+		<transition on="submit" to="submit"></transition>
 	</view-state>
 	
+	<!-- Action state that will be called once the user submit the details -->
+	<!-- go to success(end state) -->
+	<action-state id="submit">
+		<evaluate expression="registerHandler.saveAll(flowScope.registerModel)" />
+		<transition on="success" to="success" />
+	</action-state>
 	
 	
-	<!-- end state -->
+	
+	<!-- End state -->
 	<end-state id="home" view="externalRedirect:contextRelative:/"></end-state>
 	<!-- End State which will be displayed after successfully registered -->
 	<end-state id="success" view="flows/register/signup-success"></end-state>
