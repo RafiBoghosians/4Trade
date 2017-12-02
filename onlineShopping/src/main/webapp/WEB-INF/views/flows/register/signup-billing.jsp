@@ -7,15 +7,12 @@
 		<div class="col-md-6 col-md-offset-3">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-
 					<h4>Sign Up - Address</h4>
-
 				</div>
 
 				<div class="panel-body">
 
 					<!-- FORM Elements -->
-
 					<sf:form
 							method="POST"
 							class="form-horizontal" 
@@ -25,7 +22,7 @@
 
 						<!-- Address Line One -->
 						<div class="form-group">
-							<label class="control-label col-md-4">Address Line One: </label>
+							<label class="control-label col-md-4" for="addressLineOne">Address Line One: </label>
 							<div class="col-md-8">
 								<sf:input type="text" path="addressLineOne" placeholder="Enter Address Line One" class="form-control" />		
 								<sf:errors path="addressLineOne" cssClass="help-block" element="em" />	
@@ -34,7 +31,7 @@
 						
 						<!-- Address Line Two -->
 						<div class="form-group">
-							<label class="control-label col-md-4"> Address Line Two: </label>
+							<label class="control-label col-md-4" for="addressLineTwo">Address Line Two: </label>
 							<div class="col-md-8">
 								<sf:input type="text" path="addressLineTwo" placeholder="Enter Address Line Two" class="form-control" />
 								<sf:errors path="addressLineTwo" cssClass="help-block" element="em" />
@@ -55,6 +52,7 @@
 							<label class="control-label col-md-4">Postal Code: </label>
 							<div class="col-md-8">
 								<sf:input type="text" path="postalCode" placeholder="Enter Postal code" class="form-control" />
+								<sf:errors path="postalCode" cssClass="help-block" element="em" />
 							</div>
 						</div>
 						
@@ -71,7 +69,8 @@
 						<div class="form-group">
 							<label class="control-label col-md-4">Country: </label>
 							<div class="col-md-8">
-								<sf:input type="text" path="country" placeholder="Enter your country name" class="form-control" />	
+								<sf:input type="text" path="country" placeholder="Enter your country name" class="form-control" />
+								<sf:errors path="country" cssClass="help-block" element="em" />	
 							</div>
 						</div>
 						

@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 @Entity
 public class Address implements Serializable  {
 
@@ -43,21 +45,27 @@ public class Address implements Serializable  {
 	
 	
 	@Column(name = "address_line_one")
+	@NotBlank(message = "Please enter your Address Line One!")
 	private String addressLineOne;
 
 	@Column(name = "address_line_two")
+	@NotBlank(message = "Please enter your Address Line Two!")
 	private String addressLineTwo;
 
 	@Column(name = "city")
+	@NotBlank(message = "Please enter your City!")
 	private String city;
 
 	@Column(name = "state")
+	@NotBlank(message = "Please enter your State!")
 	private String state;
 
 	@Column(name = "country")
+	@NotBlank(message = "Please enter your Country!")
 	private String country;
 
 	@Column(name = "postal_code")
+	@NotBlank(message = "Please enter your Postal Code!")
 	private String postalCode;
 
 	// If the boolean value for billing is true, it means that

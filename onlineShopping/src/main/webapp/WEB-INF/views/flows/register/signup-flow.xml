@@ -24,11 +24,21 @@
 	<!-- the user instance is going to store inside the flow scope so we need to parse the instance by adding model="user" -->
 	<view-state id="personal" view="flows/register/signup-personal" model="user">
 		<!-- when the user clicks on Submit Button(sign up-personal) -->
-		<transition on="billing" to="billing"></transition>
+		<transition on="billing" to="validate"></transition>
 			<on-exit>																<!-- model="user" -->
 				<evaluate expression="registerHandler.addUser(flowScope.registerModel,user)" />
 			</on-exit>
 	</view-state>
+	
+	<!-- User Validation -->
+	<!-- messageContext will parse the message from our validateUser and it will display inside the form  -->
+	<action-state id="validate">
+		<evaluate expression="registerHandler.validateUser(user,messageContext)" />
+		<!-- if from validateUser we get "success" it should go to "billing" -->
+		<transition on="success" to="billing"></transition>
+		<!-- if from validateUser we get "failure" it should go to above personal -->
+		<transition on="failure" to="personal"></transition>
+	</action-state>
 	
 	<!-- View State that will have the address of particular user-->
 	<view-state id="billing" view="flows/register/signup-billing" model="billing">
@@ -68,7 +78,8 @@
 	<!-- Add a GLOBAL TRANSITION to move the home from any particular view and end the state -->
 	<global-transitions>
 		<!-- when the user click on that particular home it will go to another state whose id=home(end-state) -->
-		<transition on="home" to="home"/>
+		<!-- validate="false" for when we click on home in sign-up stage it will ignore the validation -->
+		<transition on="home" to="home" validate="false"/>
 	</global-transitions>
 	
 

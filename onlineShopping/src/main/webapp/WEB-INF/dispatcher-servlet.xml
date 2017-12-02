@@ -20,6 +20,7 @@
    
    <bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		
 		<property name="prefix" value="/WEB-INF/views/"></property>
 		<property name="suffix" value=".jsp"></property>
    </bean>
@@ -43,18 +44,21 @@
 	<wf:flow-registry id="flowRegistry" base-path="/WEB-INF/views/flows"
 	flow-builder-services="flowBuilderServices"
 	>	
-		<wf:flow-location-pattern value="/**/*-flow.xml" />
+	
+	<wf:flow-location-pattern value="/**/*-flow.xml" />
 	</wf:flow-registry>
 	
 	<!-- for resolving the view -->	
 	 <wf:flow-builder-services id="flowBuilderServices" 
-	 		view-factory-creator="viewFactoryCreator" />
+	 		view-factory-creator="viewFactoryCreator"
+	 		validator="validator" 
+	 />
 	
 	<!--Spring WebFlow provides a Spring MVC handler adapter called FlowHandlerAdapter. 
 	This handler adapter is the bridge between DispatcherServlet and the flow executor,
 	handling request and manipulating the flow based on those requests -->	
 	<bean class="org.springframework.webflow.mvc.servlet.FlowHandlerAdapter">
-		<property name="flowExecutor" ref="flowExecutor"></property>
+		<property name="flowExecutor" ref="flowExecutor" />
 	</bean>
 	
 	<!-- DispatcherServelet knows how to dispatch requests by consulting with one or more
@@ -62,15 +66,21 @@
 	flow requests to the FlowHandlerAdapter -->
 	<!-- This will give a priority to webflow in situations if we add controller with register mapping -->
 	<bean class="org.springframework.webflow.mvc.servlet.FlowHandlerMapping">
-		<property name="flowRegistry" ref="flowRegistry"></property>
-		<property name="order" value="-1"></property>
+		<property name="flowRegistry" ref="flowRegistry" />
+		<property name="order" value="-1" />
 	</bean>
    
    <!-- Will help to resolve the view  -->
-   <bean id="viewFactoryCreator"
+    <bean id="viewFactoryCreator"
 		class="org.springframework.webflow.mvc.builder.MvcViewFactoryCreator">
-		<property name="viewResolvers" ref="viewResolver"></property>
+		<property name="viewResolvers" ref="viewResolver" />
 	</bean>
+	
+	<!-- Validator Bean -->
+	<!-- we have created LocalValidatorFactoryBean which is refer above inside flow-builder-service -->
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
+		
+	
    
    
    
