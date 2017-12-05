@@ -11,7 +11,10 @@ public interface CategoryDAO {
 
 	// Get a single category
 	Category get(int id);
-
+	
+	//boolean if it returns true it means that category added successfully
+	// and if it returns false it means CHSTACVAAAAV APEEEE
+	
 	// add a category
 	boolean add(Category category);
 

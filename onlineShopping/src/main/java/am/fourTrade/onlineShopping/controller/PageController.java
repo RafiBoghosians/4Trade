@@ -31,6 +31,9 @@ public class PageController {
 	private ProductDAO productDAO;
 
 	@RequestMapping(value = { "/", "/home", "/index" })
+	//Holder for both Model and View in the web MVC framework. 
+	//Note that these are entirely distinct. 
+	//This class merely holds both to make it possible for a controller to return both model and view in a single return value.
 	public ModelAndView index() {
 
 		ModelAndView mv = new ModelAndView("page");
@@ -39,7 +42,7 @@ public class PageController {
 		logger.info("Inside the PageController index method - INFO");
 		logger.debug("Inside the PageController index method - DEBUG");
 
-		// passing the list of categories
+		// Passing the list of categories, we inject CategoryDAO with Spring IOC
 		mv.addObject("categories", categoryDAO.list());
 
 		mv.addObject("userClickHome", true);
@@ -78,15 +81,17 @@ public class PageController {
 		mv.addObject("userClickAllProducts", true);
 		return mv;
 	}
-
+	
+	//{id} is dynamic that we added in sidebar.jsp
 	@RequestMapping(value = { "/show/category/{id}/products" })
 	public ModelAndView showCategoryProducts(@PathVariable("id") int id) {
 		ModelAndView mv = new ModelAndView("page");
 		// categoryDAO to fetch a single category
-		Category category = null;
-
-		category = categoryDAO.get(id);
-
+		Category category = null;	
+		category = categoryDAO.get(id); //get the category by its id
+		
+		//3 Objects we are passing "title", "categories", "category"
+		
 		mv.addObject("title", category.getName());
 
 		// passing the list of categories
@@ -105,7 +110,8 @@ public class PageController {
 		ModelAndView mv = new ModelAndView("page");
 			
 			Product product = productDAO.get(id);
-			
+			//if product is not available throw ProductNotFoundException
+			//This is a checked exception so we need to "throws ProductNotFoundException" otherwise try/catch
 			if(product == null) throw new ProductNotFoundException();
 			
 			// In order to increment the number of customer views

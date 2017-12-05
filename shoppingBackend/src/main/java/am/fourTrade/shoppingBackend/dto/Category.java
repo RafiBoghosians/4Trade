@@ -13,8 +13,6 @@ import org.hibernate.annotations.Type;
 @Entity
 public class Category {
 
-
-
 	// Private fields
 	
 	@Id

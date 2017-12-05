@@ -1,7 +1,7 @@
 package am.fourTrade.shoppingBackend.dto;
 
 
-import java.io.Serializable;
+
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -41,7 +41,7 @@ public class Product {
 	
 	@JsonIgnore
 	@Column(name = "description")
-	@NotBlank(message = "Please enter the description for product!")
+	@NotBlank(message = "Please enter a description for the product!")
 	private String description;
 	
 	@Column(name = "unit_price")
@@ -68,6 +68,7 @@ public class Product {
 	@Column(name = "views")
 	private int views;
 	
+	//This MultipartFile will help us to hold the binary file which is image that we upload
 	@Transient
 	private MultipartFile file;
 	

@@ -39,10 +39,15 @@ public class ManagementController {
 	//Add a logger object to log the product object for testing the value of product object.
 	//This is only for our debugging purpose
 	private static final Logger logger = LoggerFactory.getLogger(ManagementController.class);
-
+	
+	//By default the method is GET but i explicitly show it
 	@RequestMapping(value = "/products", method = RequestMethod.GET)
 	public ModelAndView showManageProducts(@RequestParam(name = "operation", required = false) String operation) {
 
+		//name = "operation", required = false
+		//For Displaying useful message to the user after make some operation on product.
+		
+		
 		ModelAndView mv = new ModelAndView("page");
 
 		mv.addObject("userClickManageProducts", true);
@@ -51,10 +56,16 @@ public class ManagementController {
 		Product newProduct = new Product();
 
 		// set some of the fields
+		//newProduct.setSupplierId(0); 1 for admin
 		newProduct.setSupplierId(1);
+		//so if admin add a new product by default it would be true
 		newProduct.setActive(true);
-
+		//name of the product and newProduct object
 		mv.addObject("product", newProduct);
+		
+		//By the way as soon as Product newProduct = new Product(); <<newProduct>>
+		//created the code for product will generated so we can use it for our images
+		//so the view can access it with the name of "product" >> manageProduct.jsp
 		
 		if (operation != null) {
 			if (operation.equals("product")) {
@@ -87,6 +98,8 @@ public class ManagementController {
 	//in our manageProducts.jsp, modelAttribute="product" so we put "product" in @ModelAttribute
 	public String handleProductSubmission(@Valid @ModelAttribute("product") Product modifiedProduct, BindingResult results, Model model, HttpServletRequest request) {
 		
+		//springframework.validation.BindingResult for error registration capabilities, allowing for a Validator(@Valid) to be applied
+		// add "Model model" to pass any data to the view
 		
 		//for validation of image
 		if(modifiedProduct.getId() == 0) {
@@ -131,6 +144,14 @@ public class ManagementController {
 			FileUploadUtility.uploadFile(request, modifiedProduct.getFile(), modifiedProduct.getCode());
 		}
 		
+		//HttpServletRequest request
+		//A HTTP multipart request is a HTTP request that HTTP clients construct to send
+		//files and data over to a HTTP Server. It is commonly used by browser and HTTP
+		//clients to upload files to the server.
+		
+		
+		
+		
 		
 		return "redirect:/manage/products?operation=product";
 	}
@@ -169,6 +190,7 @@ public class ManagementController {
 	
 	// For categories we are creating a method level @ModelAttribute and fetch it.
 	// It is going to return list of "categories" for all the request mapping
+	//we use this in manageProducts.jsp select category part
 	@ModelAttribute("categories")
 	public List<Category> getCategories() {
 		return categoryDAO.list();

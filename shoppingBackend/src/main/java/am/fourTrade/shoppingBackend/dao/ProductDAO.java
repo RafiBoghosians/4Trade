@@ -24,10 +24,12 @@ public interface ProductDAO {
 	
 	
 	
-	//business methods
-
+	//Extra Methods
+	
+	//List of Active Products
 	List<Product> listActiveProducts();
-
+	
+	//Finding the products by category
 	List<Product> listActiveProductsByCategory(int categoryId);
 
 	// for example find 10 latest product

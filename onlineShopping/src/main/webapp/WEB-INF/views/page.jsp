@@ -4,6 +4,11 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
+<!--${pageContext.request.contextPath} : 
+Returns the portion of the request URI that indicates the context of the request.  
+http://localhost:80/myProjectName/path/servlet
+${pageContext.request.contextPath} returns /myProjectName
+-->
 <c:set var="contextRoot" value="${pageContext.request.contextPath }" />
 
 <spring:url var="css" value="/resources/css"></spring:url>
@@ -20,9 +25,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
+<!-- we will get the title from page controller -->
+<title>4Trade - ${title}</title>
 
-<title>4Trade Online Shopping - ${title}</title>
-
+<!-- we will get the variable form page controller -->
 <script>
 	window.menu = '${title}';
 	window.contextRoot = '${contextRoot}'
@@ -50,13 +56,15 @@
 </head>
 
 <body>
-
+	<!--Custom CSS  -->
 	<div class="wrapper">
 
 		<!-- Navigation -->
 		<%@include file="./shared/navbar.jsp"%>
 
 		<!-- Page Content -->
+	
+		<!--Custom CSS  -->
 		<div class="content">
 
 			<!-- Loading the home content -->

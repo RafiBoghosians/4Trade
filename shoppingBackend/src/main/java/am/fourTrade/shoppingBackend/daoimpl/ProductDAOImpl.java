@@ -36,7 +36,7 @@ public class ProductDAOImpl implements ProductDAO {
 		return null;
 	}
 
-	// add a product
+	// Add a product
 	@Override
 	public boolean add(Product product) {
 		try {

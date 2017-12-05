@@ -44,7 +44,7 @@
 		<!-- Navigation -->
 		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 			<div class="container">
-				<!-- Brand and toggle get grouped for better mobile display -->
+				<!-- Brand and toggle get grouped for better mobile display / include home button when someone click on Home will go to home page-->
 				<div class="navbar-header">
 					<a class="navbar-brand" href="${contextRoot }/home">Home</a>
 				</div>

@@ -1,7 +1,7 @@
 package am.fourTrade.onlineShopping.exception;
 
 import java.io.Serializable;
-
+//Custom Exception(HTTP Status 500)
 public class ProductNotFoundException extends Exception implements Serializable {
 	
 	/**

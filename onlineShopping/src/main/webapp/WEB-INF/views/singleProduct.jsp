@@ -61,12 +61,12 @@
 
 			</c:otherwise>
 		</c:choose>
-		<!-- For Adding to Cart, if the quantity is less than 0, the add to cart button should be disabled -->
+		<!-- For Adding to Cart, if the quantity is less than 1, the add to cart button should be disabled -->
 		<c:choose>
 
 			<c:when test="${product.quantity < 1}">
 				<h6>
-
+					<!-- "javascript:void(0)" the link will not be available -->
 					<a href="javascript:void(0)" class="btn btn-success disabled">
 					<del><span class="glyphicon glyphicon-shopping-cart"></span>
 					Add to Cart </del></a>

@@ -3,7 +3,7 @@
 <div class="container">
 	<div class="row">
 	
-	
+	<!-- "operation" part in ManagementController if there is some value it will show by here -->
 	<c:if test="${not empty message}">
 	
 		<div class="col-xs-12">
@@ -20,7 +20,7 @@
 	
 	</c:if>
 		
-		
+		<!-- offset-2 and md-8 so the entire div will come center -->
 		<div class="col-md-offset-2 col-md-8">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
@@ -28,8 +28,11 @@
 				</div>
 				<div class="panel-body">
 					<!-- The elements of FORM -->
-					<!-- The name of modelAttribute is based of ManagementController class, product attributeName-->
+					<!-- The name of modelAttribute is based of ManagementController class, mv.addObject("product", newProduct);-->
 					<!-- modelAttribute convert usual form in to Spring Form -->
+					<!-- IF we use class="form-horizontal" we don't need to use row and column inside my form -->
+					<!-- we have respect handler in ManagmentController for this action -> handleProductSubmission -->
+					<!-- enctype indicates that when this form will be posted it consists of the form data along with the binary file -->
 					<sf:form class="form-horizontal" modelAttribute="product"
 						action="${contextRoot}/manage/products"
 						method="POST"
@@ -131,7 +134,8 @@
 							<div class="col-md-offset-4 col-md-8">
 								<input type="submit" name="submit" id="submit" value="Submit" class="btn btn-primary" />
 								
-								<!-- Hidden fields for products  -->
+								<!-- Set the other fields as the hidden fields otherwise it will return the default values instead of the original values when we would be using the same form to edit the product -->
+								<!-- Product Hidden fields-->
 								<sf:hidden path="id" />
 								<sf:hidden path="code" />
 								<sf:hidden path="supplierId" />
@@ -167,7 +171,7 @@
 		</div>	
 		
 		<div class="col-xs-12">
-		
+			<!--To handle overflow of table  -->
 			<div style="overflow: auto;">
 			
 	<!-- Products table for admin -->

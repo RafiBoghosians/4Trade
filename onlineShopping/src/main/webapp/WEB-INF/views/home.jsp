@@ -86,7 +86,7 @@
 						<div class="caption">
 							<h4 class="pull-right">828,900  &#1423;</h4>
 							<h4>
-								<a https://www.gsmarena.com/apple_iphone_x-8858.php>iPhone X</a>
+								<a href="https://www.gsmarena.com/apple_iphone_x-8858.php">iPhone X</a>
 							</h4>
 							<p>
 								Apple iPhone X<br>

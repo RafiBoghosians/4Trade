@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import am.fourTrade.shoppingBackend.dao.ProductDAO;
 import am.fourTrade.shoppingBackend.dto.Product;
 
+//http://localhost:8080/onlineShopping/json/data/all/products
 @Controller
 @RequestMapping("/json/data")
 public class JsonDataController {
@@ -19,13 +20,15 @@ public class JsonDataController {
 	private ProductDAO productDAO;
 
 	@RequestMapping("/all/products")
-	@ResponseBody // Automatically it will look at converter(Jackson) and add to class path and
-					// listActiveProduct will be return in the form of JSON
+	@ResponseBody // Automatically it will look at converter(Jackson)
+				   //and add to class path and listActiveProduct will be 
+					//returned in the form of JSON 
 	public List<Product> getAllProducts() {
 
 		return productDAO.listActiveProducts();
 	}
 	
+	//So in this case instead of sending listActiveProducts we return list of all the products since admin can see all he products
 	@RequestMapping("/admin/all/products")
 	@ResponseBody
 	public List<Product> getAllProductsForAdmin() {

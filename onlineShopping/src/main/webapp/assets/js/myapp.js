@@ -72,6 +72,8 @@ $(function() {
 						{
 							data : 'unitPrice',
 							mRender : function(data, type, row) {
+								//(data, type, row) => the actual value that 'unitPrice'holds
+								//the type of data and the entire row
 								// HTML Currency Symbols for Armenian dram
 								return data + ' &#1423;'
 						}
@@ -89,6 +91,7 @@ $(function() {
 							}
 					},
 					{
+						//the part of 2 button shopping cart and view, we set bSortable: false since we doesn't want any sorting
 						data : 'id',
 						bSortable: false,	
 						mRender: function(data, type, row) {

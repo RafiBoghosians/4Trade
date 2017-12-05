@@ -11,6 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 import am.fourTrade.shoppingBackend.dao.CategoryDAO;
 import am.fourTrade.shoppingBackend.dto.Category;
 
+//@Repository annotation is a marker for class specifying that it fulfills the role of
+//providing access to the data and will be managed by Spring framework
+
 //which will be the same name as object name that is given in the PageController
 @Repository("categoryDAO") 
 @Transactional
@@ -38,7 +41,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 	@Override
 	public Category get(int id) {
 		// the second argument requires a reference type, so we get get(int id) and
-		// wrape with Integer class
+		// wrap with Integer class
 		return sessionFactory.getCurrentSession().get(Category.class, Integer.valueOf(id));
 	}
 

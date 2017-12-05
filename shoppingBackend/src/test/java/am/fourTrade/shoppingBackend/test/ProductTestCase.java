@@ -28,25 +28,25 @@ public class ProductTestCase {
 	/*
 	 * @Test public void testCRUDProduct() { product = new Product();
 	 * 
-	 * product.setName("Oppo Selfie 553"); product.setBrand("Oppo");
-	 * product.setDescription("Description for Oppo Selfie 553");
-	 * product.setUnitPrice(25000); product.setActive(true);
-	 * product.setCategoryId(3); product.setSupplierId(3);
+	 * product.setName("Google Selfie"); product.setBrand("AAa");
+	 * product.setDescription("Description for Google Selfie AAa");
+	 * product.setUnitPrice(5648005); product.setActive(true);
+	 * product.setCategoryId(2); product.setSupplierId(0);
 	 * 
-	 * assertEquals("Something went wrong while adding products", true,
+	 * assertEquals("System failed while add a products", true,
 	 * productDAO.add(product));
 	 * 
 	 * 
 	 * // read and update the product product = productDAO.get(2);
-	 * product.setName("Samsung galaxy s7");
-	 * assertEquals("Something went wrong while adding products", true,
+	 * product.setName("Iphone X");
+	 * assertEquals("System failed while add products", true,
 	 * productDAO.update(product));
 	 * 
-	 * assertEquals("Something went wrong while deleting existing records", true,
+	 * assertEquals("System failed while deleting existing records", true,
 	 * productDAO.delete(product));
 	 * 
-	 * // list assertEquals("Something went wrong while fetching list of products",
-	 * 6, productDAO.list().size());
+	 * // list assertEquals("System failed while add while fetching list of products",6, productDAO.list().size());
+	 * 
 	 * 
 	 * }
 	 */
