@@ -28,7 +28,7 @@ public class JsonDataController {
 		return productDAO.listActiveProducts();
 	}
 	
-	//So in this case instead of sending listActiveProducts we return list of all the products since admin can see all he products
+	//Instead of sending listActiveProducts we return list of all the products since admin can see all he products
 	@RequestMapping("/admin/all/products")
 	@ResponseBody
 	public List<Product> getAllProductsForAdmin() {
