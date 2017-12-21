@@ -11,12 +11,20 @@
 	
 	
 	<context:component-scan base-package="am.fourTrade.shoppingBackend" />
+	
+	<!--We should not provide any security for our static resources(css/javascript)  -->
+	<!--Add a separate http element to allow loading the static resources which does not require any form of security-->
+	<http pattern="/resources/**" security="none" />
+	
+	
 
 	<http>
+		<!-- Access to login page to all the user -->
+		<intercept-url pattern="/login" access="permitAll" />
 		<!-- Difference bewteen hasRole and hasAuthority is that in hasAuthority we don't write ROLE in front in <user-service> part  -->
 		<!-- <intercept-url pattern="/**" access="hasRole('USER')" /> -->
-		<intercept-url pattern="/**" access="hasAuthority('USER')" />
-		<form-login />
+		<intercept-url pattern="/**" access="hasAuthority('USER')" />	
+		<form-login login-page="/login" />
 		<logout />
 	</http>
 

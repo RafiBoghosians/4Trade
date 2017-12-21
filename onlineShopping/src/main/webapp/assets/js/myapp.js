@@ -338,6 +338,50 @@ $(function() {
 	// ------------------------------
 	
 	
+	// --------------------------
+	//validation code for Login(login.jsp)
+
+	var $loginForm = $('#loginForm');
+	//checking loginForm is there or not
+	if ($loginForm.length) {
+	//loginForm validation
+		$loginForm.validate({
+
+			rules : {
+				
+				username : {
+					required : true,
+					email : true
+				},
+				password : {
+					required : true
+				}
+			},
+			messages : {
+				username : {
+					required : 'Please enter your username!',
+					email : 'Please enter valid email address!'
+				},
+				
+				password : {
+					required : 'Please enter your password!'
+				}
+
+			},
+			errorElement : 'em',
+			errorPlacement : function(error, element) {
+				//add the class of help-block
+				error.addClass('help-block');
+				//add the error element after the input element
+				error.insertAfter(element);
+			}
+
+		});
+	}
+
+	// ------------------------------
+	
+	
 	
 	
 });
