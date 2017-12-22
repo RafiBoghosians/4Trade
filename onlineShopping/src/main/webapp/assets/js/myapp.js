@@ -21,6 +21,24 @@ $(function() {
 		$('#a_' + menu).addClass('active');
 		break;
 	}
+	
+	//to tackle the csrf token
+	//fetch that token using JQuery selector
+	//it will give the value from page.jsp >>> <meta name="_csrf" content="${_csrf.token}">
+	var token = $('meta[name="_csrf"]').attr('content');
+	//the same way with header
+	var header = $('meta[name="_csrf_header"]').attr('content');
+	
+	if(token.length > 0 && header.length > 0){
+		//set the token header for the Ajax request
+		//inside document for any kind of Ajax request we are going to wirte a callBack
+		//event, XML HTTP Request
+		$(document).ajaxSend(function(e, xhr, options) {
+			xhr.setRequestHeader(header,token); 
+		});				
+	}
+	
+	
 
 	// code for JQuery dataTable
 

@@ -74,6 +74,16 @@ ${pageContext.request.contextPath} returns /myProjectName
 		<div class="content">
 
 			<div class="container">
+				<!-- The error message will be display if the user input wrong credential -->
+				<c:if test="${not empty message}">
+					<div class="row">
+						<div class="col-md-offset-3 col-md-6">
+							<div class="alert alert-danger">
+								${message}
+							</div>
+						</div>
+					</div>
+				</c:if>
 
 				<div class="row">
 
@@ -102,6 +112,8 @@ ${pageContext.request.contextPath} returns /myProjectName
 									<div class="form-group">
 										<div class="col-md-offset-4 col-md-8">
 											<input type="submit" value="Login" class="btn btn-primary" />
+											<!-- TO PROVIDE A CSRF Token -->
+											<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 										</div>
 									</div>
 								</form>
